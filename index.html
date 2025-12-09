@@ -195,17 +195,26 @@
         .flagship { background: linear-gradient(to bottom right, #fff, #f4fbff); border: 2px solid #b3e0ff; }
         .flagship .project-tag { background: var(--accent); color: white; }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE FIXES --- */
+        
+        /* TABLET (900px and below) */
         @media (max-width: 900px) {
             .hero-container { flex-direction: column; text-align: center; gap: 30px; }
             .hero-content { text-align: center; }
             .hero h1 { font-size: 2.5rem; min-height: auto; margin-bottom: 20px;}
             .profile-img-wrapper { width: 220px; height: 220px; margin: 0 auto; }
+            
+            /* FIX 2: Methodology (Tablet View - Enforce 2 Columns) */
             .workflow::before { display: none; }
-            .workflow { flex-wrap: wrap; justify-content: center; }
-            .step { min-width: 45%; margin-bottom: 20px; }
+            .workflow { flex-wrap: wrap; justify-content: space-between; }
+            .step { 
+                min-width: 48%; /* Ensures 2 steps per row */
+                flex-basis: 48%; /* Ensures uniformity */
+                margin-bottom: 20px; 
+            }
         }
 
+        /* MOBILE (768px and below) */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
             nav ul {
@@ -225,11 +234,25 @@
             .stats { flex-direction: column; gap: 20px; margin-top: -30px; }
             .stat-card { border-bottom: none; border-left: 5px solid var(--accent); text-align: left; padding: 20px; }
             
-            .roi-section { padding: 60px 5%; }
+            /* FIX 1: ROI Calculator (Prevent overflow on small screens) */
+            .roi-section { padding: 40px 10px; } /* Reduced horizontal padding */
+            .calc-container { padding: 20px; } /* Reduced inner padding */
             .calc-grid { grid-template-columns: 1fr; gap: 30px; }
             
+            /* FIX 2: Methodology (Mobile View - Enforce 1 Column Stack) */
             .workflow { flex-direction: column; align-items: center; gap: 0; }
-            .step { width: 100%; display: flex; align-items: center; text-align: left; margin-bottom: 20px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+            .step { 
+                width: 100%; 
+                flex-basis: auto; /* Allow height based on content */
+                display: flex; 
+                align-items: center; 
+                text-align: left; 
+                margin-bottom: 20px; 
+                background: white; 
+                padding: 15px; 
+                border-radius: 10px; 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            }
             .step-icon { width: 50px; height: 50px; font-size: 1.2rem; margin: 0 15px 0 0; flex-shrink: 0; }
             .step div { flex-grow: 1; }
 
@@ -248,7 +271,8 @@
             <li><a href="#about" onclick="toggleMenu()">About</a></li>
             <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
             <li><a href="#projects" onclick="toggleMenu()">Portfolio</a></li>
-            <li><a href="#insurance-value" onclick="toggleMenu()">Value</a></li> <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="#insurance-value" onclick="toggleMenu()">Value</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
     </nav>
 
@@ -388,7 +412,7 @@
             <div class="project-card flagship" data-category="pp">
                 <div class="project-body">
                     <span class="project-tag">Highlight</span>
-                    <h3>Change Routing</h3>
+                    <h3>Change Routing (CA02)</h3>
                     <p>Optimized SAP Mass Data Change. Reduced manual effort from 167 hrs to 2 hrs monitoring (98.8% reduction).</p>
                     <div class="tech-stack"><i class="fab fa-neos"></i> <i class="fas fa-server"></i> <i class="fas fa-bolt"></i></div>
                 </div>
@@ -528,9 +552,9 @@
             if (letter.length === currentText.length) {
                 count++;
                 index = 0;
-                setTimeout(type, 2000); // Pause at end of word
+                setTimeout(type, 2000); 
             } else {
-                setTimeout(type, 100); // Typing speed
+                setTimeout(type, 100); 
             }
         })();
 
